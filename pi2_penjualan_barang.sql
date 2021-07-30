@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Jul 2021 pada 18.17
--- Versi server: 10.4.18-MariaDB
--- Versi PHP: 7.4.16
+-- Generation Time: Jul 30, 2021 at 05:19 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang`
+-- Table structure for table `barang`
 --
 
 CREATE TABLE `barang` (
@@ -36,18 +37,20 @@ CREATE TABLE `barang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `barang`
+-- Dumping data for table `barang`
 --
 
 INSERT INTO `barang` (`barang_id`, `nama_barang`, `harga_barang`, `stok`, `keterangan`) VALUES
-(7, 'Indomie Soto', 3000, 50, 'Indomie Soto'),
-(8, 'Gula Pasir', 4500, 20, 'Gula Pasir'),
-(9, 'Sedaap Goreng', 3000, 30, 'Sedaap Goreng');
+(7, 'Tv', 2000000, 30, 'TV Samsung'),
+(8, 'AC', 1300000, 17, 'AC Sharp'),
+(9, 'Kulkas', 5000000, 12, 'Kulkas LG'),
+(10, 'Kipas Angin', 600000, 40, 'Kipas Angin Cosmos'),
+(11, 'Mesin Cuci', 12000000, 5, 'Mesin Cuci Sharp');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pelanggan`
+-- Table structure for table `pelanggan`
 --
 
 CREATE TABLE `pelanggan` (
@@ -58,18 +61,19 @@ CREATE TABLE `pelanggan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `pelanggan`
+-- Dumping data for table `pelanggan`
 --
 
 INSERT INTO `pelanggan` (`pelanggan_id`, `nama_pelanggan`, `no_tlp`, `alamat`) VALUES
-(2, 'Aulia Apriliani', '085322201100', 'Cirebon'),
-(3, 'Nur Intan Agustin', '085712344321', 'Kuningan'),
-(4, 'Amira Shoffa', '081520200800', 'Bandung');
+(2, 'Nayeon', '085219685932', 'Cirebon'),
+(3, 'Dahyun', '085213948295', 'Jakarta'),
+(4, 'Tzuyu', '081345293059', 'Bandung'),
+(5, 'Chaeyoung', '081325039212', 'Bogor');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penjualan`
+-- Table structure for table `penjualan`
 --
 
 CREATE TABLE `penjualan` (
@@ -81,18 +85,19 @@ CREATE TABLE `penjualan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `penjualan`
+-- Dumping data for table `penjualan`
 --
 
 INSERT INTO `penjualan` (`penjualan_id`, `tgl_penjualan`, `pelanggan_id`, `keterangan`, `total`) VALUES
-(1627393067, '2021-07-27', 2, 'Membeli Indomie Soto 1 dus\r\n', 120000),
-(1627397635, '2021-07-27', 4, 'Membeli Gula Pasir 10 bungkus', 45000),
-(1627397673, '2021-07-27', 3, 'Membeli Sedaap Goreng 20 bungkus', 60000);
+(1627612133, '2021-07-30', 2, 'Membeli 1 TV Samsung', 2000000),
+(1627612154, '2021-07-30', 3, 'Membeli 3 AC Sharp', 3900000),
+(1627612212, '2021-07-30', 4, 'Membeli 1 Kulkas LG (Diskon 10%)', 4500000),
+(1627612315, '2021-07-30', 5, 'Membeli 1 Mesin Cuci Sharp', 12000000);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penjualan_detail`
+-- Table structure for table `penjualan_detail`
 --
 
 CREATE TABLE `penjualan_detail` (
@@ -105,76 +110,70 @@ CREATE TABLE `penjualan_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `penjualan_detail`
+-- Dumping data for table `penjualan_detail`
 --
 
 INSERT INTO `penjualan_detail` (`penjualan_detail_id`, `penjualan_id`, `barang_id`, `harga_total`, `jumlah`, `diskon`) VALUES
-(2, 1627379516, 3, 45600, 24, 5),
-(3, 1627379572, 6, 243000, 90, 10),
-(4, 1, 6, 81000, 30, 10),
-(5, 1627382302, 1, 90000, 30, 0),
-(8, 1627382419, 3, 86400, 48, 10),
-(9, 1627393067, 7, 120000, 40, 0),
-(10, 1627397545, 8, 45000, 10, 0),
-(11, 1627397599, 9, 60000, 20, 0),
-(12, 1627397635, 8, 45000, 10, 0),
-(13, 1627397673, 9, 60000, 20, 0);
+(18, 1627612133, 7, 2000000, 1, 0),
+(19, 1627612154, 8, 3900000, 3, 0),
+(21, 1627612212, 9, 4500000, 1, 10),
+(22, 1627612315, 11, 12000000, 1, 0);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `barang`
+-- Indexes for table `barang`
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`barang_id`);
 
 --
--- Indeks untuk tabel `pelanggan`
+-- Indexes for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
   ADD PRIMARY KEY (`pelanggan_id`);
 
 --
--- Indeks untuk tabel `penjualan`
+-- Indexes for table `penjualan`
 --
 ALTER TABLE `penjualan`
   ADD PRIMARY KEY (`penjualan_id`);
 
 --
--- Indeks untuk tabel `penjualan_detail`
+-- Indexes for table `penjualan_detail`
 --
 ALTER TABLE `penjualan_detail`
   ADD PRIMARY KEY (`penjualan_detail_id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `barang`
+-- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `pelanggan`
+-- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `pelanggan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `pelanggan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `penjualan`
+-- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `penjualan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1627397674;
+  MODIFY `penjualan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1627612316;
 
 --
--- AUTO_INCREMENT untuk tabel `penjualan_detail`
+-- AUTO_INCREMENT for table `penjualan_detail`
 --
 ALTER TABLE `penjualan_detail`
-  MODIFY `penjualan_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `penjualan_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
